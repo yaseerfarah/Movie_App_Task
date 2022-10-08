@@ -21,7 +21,12 @@ deleted and sync again from Api.
  
  # Screens:
  
+  <img src="Images/mgif.gif" width="300" height="600">
+ 
  * Home screen that list movies categorized horizontally
+ 
+ <img src="Images/screen_1.jpg" width="300" height="600">
  
  * Details screen when click on Movie Item, that display required info about the selected Movie
 
+ <img src="Images/screen_2.jpg" width="300" height="600">
