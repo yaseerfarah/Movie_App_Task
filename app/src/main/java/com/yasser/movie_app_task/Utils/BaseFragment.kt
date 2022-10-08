@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
-open class BaseFragment<T:ViewDataBinding>(private val contentLayoutId:Int):Fragment() {
+open abstract class BaseFragment<T: ViewBinding>(private val contentLayoutId:Int):Fragment() {
 
 
     lateinit var mBinding:T
+    abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +29,7 @@ open class BaseFragment<T:ViewDataBinding>(private val contentLayoutId:Int):Frag
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding= DataBindingUtil.inflate(
-            inflater, contentLayoutId, container, false)
+        mBinding= bindingInflater.invoke(inflater, container, false)
         return mBinding.root;
     }
 

@@ -2,7 +2,9 @@ package com.yasser.movie_app_task.Screens.Home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +21,7 @@ import com.yasser.movie_app_task.Utils.StatefulLayout
 import com.yasser.movie_app_task.ViewModels.MovieViewModel
 import com.yasser.movie_app_task.ViewModels.ViewModelFactory
 import com.yasser.movie_app_task.databinding.FragmentHomeBinding
+import com.yasser.movie_app_task.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,6 +38,10 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var listOfCategoryWithMoviesModel:MutableList<CategoryWithMoviesModel> = mutableListOf()
 
 
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
+        get() = { inflater,parent,bool->
+            FragmentHomeBinding.inflate(inflater,parent,bool)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,23 +52,18 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 movieViewModel.uiState.collect {
                     when(it){
                         is UiStatus.Success->{
-                            Log.e("UI_STATUS","UiStatus.Success")
                             initViewPagerWithTabLayout(it.info)
                            statefulLayout.showContent()
                         }
                         is UiStatus.Loading->{
-                            Log.e("UI_STATUS","UiStatus.Loading")
                             statefulLayout.showLoading()
 
                         }
                         is UiStatus.NetworkConnectionFailed->{
-                            Log.e("UI_STATUS","UiStatus.NetworkConnectionFailed")
                             statefulLayout.showError(requireActivity().getString(R.string.check_connection))
 
                         }
                         is UiStatus.Failed->{
-                            Log.e("UI_STATUS","UiStatus.Failed")
-                            Log.e("UiStatus.Failed",it.message)
                             statefulLayout.showError(requireActivity().getString(R.string.check_connection))
                         }
                     }

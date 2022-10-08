@@ -40,6 +40,10 @@ class RoomImplement(val context: Context,val categoryWithMovieDaoRoom: CategoryW
         return categoryWithMovieDaoRoom.getAllCategories()
     }
 
+    suspend fun getAllMovies():List<MovieModel>{
+        return categoryWithMovieDaoRoom.getAllMovies()
+    }
+
 
 
    private suspend fun saveAllMoviesWithCategoryId(listOfMovieModels:List<MovieModel>,categoryId:Int){

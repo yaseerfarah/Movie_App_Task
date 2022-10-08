@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.perfex.app.main.ui.base.callback.ItemClickListener
@@ -32,8 +31,8 @@ class MovieItemAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        PhotoHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-            R.layout.movie_item,parent,false))
+        PhotoHolder(MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()),
+            parent,false))
 
 
 

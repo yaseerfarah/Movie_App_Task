@@ -2,7 +2,9 @@ package com.yasser.movie_app_task.Screens.MovieList
 
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
@@ -24,12 +26,17 @@ import eg.com.invive.barberia_ktx.Utils.DetailsItemDecoration
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragment_movie_list) {
+class MovieListFragment() : BaseFragment<FragmentMovieListBinding>(R.layout.fragment_movie_list) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var movieViewModel: MovieViewModel
     lateinit var categoryWithMoviesModel: CategoryWithMoviesModel
+
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentMovieListBinding
+        get() = { inflater,parent,bool->
+            FragmentMovieListBinding.inflate(inflater,parent,bool)
+        }
 
     val adapter: MovieItemAdapter by lazy {
         MovieItemAdapter(
@@ -83,6 +90,8 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
             null
         )
     }
+
+
 
 
 }

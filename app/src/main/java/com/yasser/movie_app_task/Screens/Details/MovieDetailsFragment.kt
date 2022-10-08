@@ -21,6 +21,7 @@ import com.yasser.movie_app_task.Screens.MovieList.Adapter.MovieItemAdapter
 import com.yasser.movie_app_task.Screens.MovieList.MovieListFragment
 import com.yasser.movie_app_task.ViewModels.MovieViewModel
 import com.yasser.movie_app_task.ViewModels.ViewModelFactory
+import com.yasser.movie_app_task.databinding.FragmentHomeBinding
 import com.yasser.movie_app_task.databinding.FragmentMovieDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,7 +34,10 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>(R.layout.
     lateinit var movieViewModel: MovieViewModel
     lateinit var movieModel: MovieModel
 
-
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentMovieDetailsBinding
+        get() = { inflater,parent,bool->
+            FragmentMovieDetailsBinding.inflate(inflater,parent,bool)
+        }
 
 
     companion object{

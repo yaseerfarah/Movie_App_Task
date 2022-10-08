@@ -73,7 +73,8 @@ class MovieViewModel(val context: Context,val roomImplement: RoomImplement,val r
         viewModelScope.launch(Dispatchers.Default){
             try {
                 _uiState.value=UiStatus.Loading<List<CategoryWithMoviesModel>>()
-                if (checkValidateData()){
+                val isDataInRoom=async { roomImplement.getAllMovies() }.await().isNotEmpty()
+                if (checkValidateData()&&isDataInRoom){
                     listOfCategoryModel.addAll(roomImplement.getAllCategories())
                     listOfCategoryWithMoviesModel.addAll(roomImplement.getAllCategoriesWithMovies())
                 }else{
