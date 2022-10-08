@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 open class BaseFragment<T:ViewDataBinding>(private val contentLayoutId:Int):Fragment() {
 
 
-    var mBinding:T?=null
+    lateinit var mBinding:T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ open class BaseFragment<T:ViewDataBinding>(private val contentLayoutId:Int):Frag
     ): View? {
         mBinding= DataBindingUtil.inflate(
             inflater, contentLayoutId, container, false)
-        return mBinding!!.root;
+        return mBinding.root;
     }
 
     val navController:NavController

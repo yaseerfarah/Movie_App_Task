@@ -1,9 +1,11 @@
 package com.yasser.movie_app_task.Model
 
+import android.os.Parcelable
 import androidx.room.*
 import com.yasser.bosta_task.Utils.Interfaces.ModelBase
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class CategoryWithMoviesModel(
     @Embedded
     var  categoryModel: CategoryModel,
@@ -18,4 +20,4 @@ data class CategoryWithMoviesModel(
         )
     )
     var moviesList: List<MovieModel>,
-)
+): Parcelable

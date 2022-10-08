@@ -42,6 +42,9 @@ interface CategoryWithMovieDaoRoom {
     fun getAllCategoriesWithMovies(): List<CategoryWithMoviesModel>
 
 
+    @Query("DELETE  FROM categorymoviepair")
+    suspend fun deleteAllRelation()
+
 
 
 
